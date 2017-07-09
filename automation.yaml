@@ -1,0 +1,28 @@
+  - alias: Hdmi Selection
+    hide_entity: True
+    trigger:
+      platform: state
+      entity_id: input_select.hdmi_input
+
+    action:
+      service: mqtt.publish
+      data_template:
+        topic: "/bensRoom/hdmiSelector1"
+        retain: true
+        payload: '{"command":"hdmi{{ states.input_select.hdmi_input.state[-1] }}"}'
+
+  # Automation.     
+   # This automation script runs when a value is received via MQTT on retained topic: thermostatMode
+   # It sets the value selector on the GUI. This selector also had its own automation when the value is changed.
+  - alias: Set Hdmi Input Selector
+    hide_entity: True
+    trigger:
+      platform: mqtt
+      topic: "/bensRoom/hdmiSelector1"
+     # entity_id: input_select.thermostat_mode
+    action:
+      service: input_select.select_option
+      data_template:
+        entity_id: input_select.hdmi_input
+        #hdmi_in_template: "{{ value_json.command }}"
+        option: 'HDMI{{ trigger.payload_json["command"][-1] }}'

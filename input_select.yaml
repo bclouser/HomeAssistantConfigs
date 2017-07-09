@@ -1,0 +1,10 @@
+
+  hdmi_input:
+      name: HdmiInput
+      options:
+       - HDMI1
+       - HDMI2
+       - HDMI3
+       - HDMI4
+      initial: HDMI1
+      icon: mdi:remote
