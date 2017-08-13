@@ -109,6 +109,20 @@ switch:
     payload_off: "{\"command\":0}"
     state_topic: "/projectorControl_SOMEHASH/status"
 
+cover:
+  - platform: mqtt
+    name: Window Shade
+    friendly_name: Window Shade
+    command_topic: "/windowShadeControl_SOMEHASH"
+    state_topic: "/windowShadeControl_SOMEHASH/status"
+    payload_open: "{\"command\":1}"
+    payload_close: "{\"command\":2}"
+    payload_stop: "{\"command\":3}"
+    state_open: "{\"command\":1}"
+    state_closed: "{\"command\":2}"
+    #optimistic: false
+    #retain: false
+
 #script:
 #  building_door:
 #    sequence:
