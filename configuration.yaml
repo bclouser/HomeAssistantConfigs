@@ -101,6 +101,7 @@ lock:
   platform: mqtt
   command_topic: "/buildingDoorControl_SOMEHASH"
   payload_unlock: "{\"command\":1}"
+  state_topic: "/snowden/buildingDoorControl/status"
 
 switch:
   - platform: mqtt
