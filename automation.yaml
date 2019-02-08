@@ -26,3 +26,33 @@
         entity_id: input_select.hdmi_input
         #hdmi_in_template: "{{ value_json.command }}"
         option: 'HDMI{{ trigger.payload_json["command"][-1] }}'
+
+  # Automation.     
+   # This automation script runs when a value is received via MQTT on retained topic: thermostatMode
+   # It sets the value selector on the GUI. This selector also had its own automation when the value is changed.
+  - alias: Set hue bulb
+    hide_entity: True
+    trigger:
+      platform: mqtt
+      topic: "/bensRoom/light1"
+    action:
+      service: light.toggle
+      entity_id: light.bens_room
+      
+     # data_template:
+        # the last character of the entity id should be the number
+        #entity_id: 'light.hue_color_lamp_{{ trigger.payload_json["command"][-1] }}'
+
+  - alias: Control hallway lights
+    hide_entity: True
+    trigger:
+      platform: mqtt
+      topic: "/powerStrip_SOMEHASH"
+    action:
+      service: light.toggle
+      entity_id: light.hallway
+
+
+
+
+
